@@ -1,8 +1,12 @@
-# React + Vite
+Neighbor Good
+Neighbor Good is a web application that displays the latest news articles from various categories such as business, entertainment, science, sports, health, and technology. Users can navigate through different categories and read full articles from their sources.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Features
+Display latest news articles by category
+Navigate through different news categories
+Read full articles by clicking on the news card
+Responsive design for better user experience on all devices
+Setup Instructions
+Prerequisites
+Node.js (v14 or later)
+npm (v6 or later)
