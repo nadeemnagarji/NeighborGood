@@ -26,6 +26,8 @@ export default function DashBoard() {
   useEffect(() => {
     dispatch(fetchArticle());
   }, []);
+
+  console.log(error);
   return (
     <div>
       <section className="text-gray-600 body-font overflow-hidden sm:mt-8 pt-4 mt-16">
@@ -44,6 +46,12 @@ export default function DashBoard() {
                   strokeOpacity={0.525}
                   speed={0.75}
                 />
+              </div>
+            )}
+            {error && (
+              <div className="w-full min-h-screen  flex flex-col justify-center items-center">
+                <h1 className=" text-2xl font-bold">{error}</h1>
+                <p className=" text-xl font-medium">Please try again later</p>
               </div>
             )}
           </div>
