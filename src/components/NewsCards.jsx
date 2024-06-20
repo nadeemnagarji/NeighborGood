@@ -10,7 +10,7 @@ export default function NewsCards({
   urlToImage,
   title,
   source,
-  articleUrl,
+  url,
   publishedAt,
 }) {
   const navigate = useNavigate();
@@ -25,11 +25,11 @@ export default function NewsCards({
         urlToImage,
         title,
         source,
-        articleUrl,
+        url,
         publishedAt,
       })
     );
-    navigate(`/article/${source.id}`);
+    navigate(`/article/${source.name}`);
   };
   return (
     <div

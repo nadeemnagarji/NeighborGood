@@ -12,7 +12,7 @@ export default function DashBoard() {
   const apiKey = import.meta.env.VITE_API_KEY;
   const news = useSelector((state) => state.MultipleArticles.allArticles);
   const loading = useSelector((state) => state.MultipleArticles.status);
-  console.log(loading);
+  //console.log(loading);
   const error = useSelector((state) => state.MultipleArticles.error);
   const dispatch = useDispatch();
   // const fetchArticle = async () => {
@@ -22,7 +22,7 @@ export default function DashBoard() {
   //   console.log(res.data);
   //   SetNews(res.data.articles);
   // };
-  console.log(news);
+  // console.log(news);
   useEffect(() => {
     dispatch(fetchArticle());
   }, []);
