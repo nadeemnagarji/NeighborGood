@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function ArticlePage() {
   const params = useParams();

@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+// http://api.mediastack.com/v1/news?access_key=7ac54d5b29f93b772483ddad78093
 const apiKey = import.meta.env.VITE_API_KEY;
 
 export const fetchArticle = createAsyncThunk("allArticles/fetch", async () => {
   const res = await axios.get(
     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
   );
-
+  console.log(res.data.articles);
   return res.data.articles;
 });
 

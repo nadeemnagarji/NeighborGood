@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addArticle } from "../store/ArticleSlice";
 
 /* eslint-disable react/prop-types */

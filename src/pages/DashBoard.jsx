@@ -1,44 +1,46 @@
-import { useNavigate } from "react-router-dom";
 import NewsCards from "../components/NewsCards";
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { fetchArticle } from "../store/NewsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-import Grid from "react-loading-icons/dist/esm/components/grid";
 import BallTriangle from "react-loading-icons/dist/esm/components/ball-triangle";
+import SearchInput from "../components/SearchInput";
 
 export default function DashBoard() {
-  const apiKey = import.meta.env.VITE_API_KEY;
   const news = useSelector((state) => state.MultipleArticles.allArticles);
   const loading = useSelector((state) => state.MultipleArticles.status);
-  //console.log(loading);
+
   const error = useSelector((state) => state.MultipleArticles.error);
   const dispatch = useDispatch();
-  // const fetchArticle = async () => {
-  //   const res = await axios.get(
-  //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
-  //   );
-  //   console.log(res.data);
-  //   SetNews(res.data.articles);
-  // };
-  // console.log(news);
+  const [input, SetInput] = useState();
+  console.log(news);
   useEffect(() => {
     dispatch(fetchArticle());
   }, []);
-
+  const handleChange = (value) => {
+    SetInput(value);
+    console.log(value);
+  };
   console.log(error);
   return (
     <div>
       <section className="text-gray-600 body-font overflow-hidden sm:mt-8 pt-4 mt-16">
-        <div className="container px-5 py-24 mx-auto">
+        <div className="container px-5 md:py-14 py-24 mx-auto">
+          <SearchInput onChange={handleChange} />
           <div className="flex flex-wrap -m-12 ">
-            {news.length > 0 &&
-              news
-                .filter((item) => item.urlToImage)
-                .map((item, index) => {
-                  return <NewsCards key={index} {...item} />;
-                })}
+            {news && news.length > 0 && !input
+              ? news
+                  .filter((item) => item.urlToImage)
+                  .map((item, index) => {
+                    return <NewsCards key={index} {...item} />;
+                  })
+              : news
+                  .filter((item) => item.title.includes(input))
+                  .filter((item) => item.urlToImage)
+                  .map((item, index) => {
+                    return <NewsCards key={index} {...item} />;
+                  })}
             {(loading === "idle" || loading === "loading") && (
               <div className="w-full min-h-screen  flex justify-center items-center">
                 <BallTriangle
