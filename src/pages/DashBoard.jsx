@@ -6,23 +6,33 @@ import { useDispatch, useSelector } from "react-redux";
 
 import BallTriangle from "react-loading-icons/dist/esm/components/ball-triangle";
 import SearchInput from "../components/SearchInput";
+import Pagination from "../components/Pagination";
 
 export default function DashBoard() {
+  //fetching data from the api
+  const dispatch = useDispatch();
   const news = useSelector((state) => state.MultipleArticles.allArticles);
   const loading = useSelector((state) => state.MultipleArticles.status);
-
   const error = useSelector((state) => state.MultipleArticles.error);
-  const dispatch = useDispatch();
+
+  //pagination code
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(4);
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentArticles = news.slice(firstPostIndex, lastPostIndex);
+
+  // the search input code
   const [input, SetInput] = useState();
-  console.log(news);
-  useEffect(() => {
-    dispatch(fetchArticle());
-  }, []);
   const handleChange = (value) => {
     SetInput(value);
     console.log(value);
   };
-  console.log(error);
+
+  useEffect(() => {
+    dispatch(fetchArticle());
+  }, []);
+
   return (
     <div>
       <section className="text-gray-600 body-font overflow-hidden sm:mt-8 pt-4 mt-16">
@@ -30,12 +40,12 @@ export default function DashBoard() {
           <SearchInput onChange={handleChange} />
           <div className="flex flex-wrap -m-12 ">
             {news && news.length > 0 && !input
-              ? news
+              ? currentArticles
                   .filter((item) => item.urlToImage)
                   .map((item, index) => {
                     return <NewsCards key={index} {...item} />;
                   })
-              : news
+              : currentArticles
                   .filter((item) => item.title.includes(input))
                   .filter((item) => item.urlToImage)
                   .map((item, index) => {
@@ -58,6 +68,12 @@ export default function DashBoard() {
             )}
           </div>
         </div>
+        <Pagination
+          totalPosts={news.length}
+          postsPerPage={postsPerPage}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </section>
     </div>
   );
