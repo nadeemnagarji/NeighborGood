@@ -26,7 +26,6 @@ export default function DashBoard() {
   const [input, SetInput] = useState();
   const handleChange = (value) => {
     SetInput(value);
-    console.log(value);
   };
 
   useEffect(() => {
